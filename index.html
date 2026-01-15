@@ -42,28 +42,80 @@
             align-items: center;
             padding: 20px;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* ===== ANIMATIONS ===== */
+        /* ===== SMOOTH ANIMATIONS ===== */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @keyframes gentlePulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 10px 30px rgba(0, 200, 83, 0.3);
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 15px 40px rgba(0, 200, 83, 0.5);
+            }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes gentleFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            33% { 
+                transform: translateY(-8px) rotate(-1deg); 
+            }
+            66% { 
+                transform: translateY(-4px) rotate(1deg); 
+            }
         }
 
-        @keyframes confettiFall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        @keyframes confettiFloat {
+            0% { 
+                transform: translateY(-100px) rotate(0deg); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes shimmer {
+            0% { 
+                background-position: -1000px 0; 
+            }
+            100% { 
+                background-position: 1000px 0; 
+            }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { 
+                border-color: rgba(0, 217, 255, 0.3); 
+            }
+            50% { 
+                border-color: rgba(0, 217, 255, 0.8); 
+            }
+        }
+
+        @keyframes buttonShimmer {
+            0% {
+                background-position: -500px 0;
+            }
+            100% {
+                background-position: 500px 0;
+            }
         }
 
         /* ===== MAIN CONTAINER ===== */
@@ -77,7 +129,25 @@
             padding: 40px;
             box-shadow: var(--shadow);
             text-align: center;
-            animation: fadeIn 0.8s ease-out;
+            animation: fadeIn 0.8s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--accent-cyan), 
+                var(--accent-purple), 
+                transparent
+            );
+            animation: shimmer 3s infinite linear;
         }
 
         /* ===== LOGO ===== */
@@ -97,7 +167,7 @@
             font-size: 32px;
             font-weight: 800;
             color: #000000;
-            animation: float 3s ease-in-out infinite;
+            animation: gentleFloat 6s ease-in-out infinite;
         }
 
         .logo-text {
@@ -105,6 +175,8 @@
             color: var(--text-secondary);
             letter-spacing: 2px;
             text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.3s forwards;
         }
 
         /* ===== SUCCESS ICON ===== */
@@ -119,8 +191,34 @@
             margin: 0 auto 30px;
             font-size: 48px;
             color: var(--text-primary);
-            animation: pulse 2s infinite;
+            animation: gentlePulse 2s infinite ease-in-out;
             box-shadow: 0 10px 30px rgba(0, 200, 83, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-icon::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: conic-gradient(
+                transparent, 
+                var(--accent-cyan), 
+                transparent, 
+                var(--accent-purple), 
+                transparent
+            );
+            animation: rotate 4s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* ===== HEADINGS ===== */
@@ -128,10 +226,15 @@
             font-size: 36px;
             font-weight: 800;
             margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--text-primary) 100%);
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--text-primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s infinite linear;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.4s forwards;
         }
 
         .subtitle {
@@ -139,6 +242,8 @@
             color: var(--text-secondary);
             margin-bottom: 30px;
             line-height: 1.5;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 0.6s forwards;
         }
 
         /* ===== USER INFO ===== */
@@ -148,6 +253,9 @@
             padding: 20px;
             margin-bottom: 30px;
             border-left: 4px solid var(--accent-cyan);
+            animation: borderGlow 2s infinite;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 0.8s forwards, borderGlow 2s infinite ease-in-out;
         }
 
         .info-item {
@@ -155,9 +263,15 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--text-secondary);
+            opacity: 0;
+            transform: translateX(-20px);
         }
+
+        .info-item:nth-child(1) { animation: slideInFromLeft 0.5s ease 1s forwards; }
+        .info-item:nth-child(2) { animation: slideInFromRight 0.5s ease 1.2s forwards; }
+        .info-item:nth-child(3) { animation: slideInFromLeft 0.5s ease 1.4s forwards; }
 
         .info-item:last-child {
             margin-bottom: 0;
@@ -172,9 +286,19 @@
             color: var(--accent-cyan);
             font-weight: 600;
             background: rgba(0, 217, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
             margin: 0 5px;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .highlight:hover {
+            background: rgba(0, 217, 255, 0.2);
+            transform: scale(1.05);
         }
 
         /* ===== NEXT STEPS ===== */
@@ -185,6 +309,8 @@
             padding: 20px;
             margin-bottom: 30px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            animation: fadeIn 0.6s ease 1.6s forwards;
         }
 
         .next-steps h3 {
@@ -201,12 +327,19 @@
         }
 
         .steps-list li {
-            padding: 8px 0;
+            padding: 10px 0;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 10px;
+            opacity: 0;
+            transform: translateX(-10px);
         }
+
+        .steps-list li:nth-child(1) { animation: slideInFromLeft 0.4s ease 1.8s forwards; }
+        .steps-list li:nth-child(2) { animation: slideInFromRight 0.4s ease 2s forwards; }
+        .steps-list li:nth-child(3) { animation: slideInFromLeft 0.4s ease 2.2s forwards; }
+        .steps-list li:nth-child(4) { animation: slideInFromRight 0.4s ease 2.4s forwards; }
 
         .steps-list li i {
             color: var(--accent-green);
@@ -220,6 +353,8 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 30px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 2.6s forwards;
         }
 
         .button {
@@ -228,7 +363,7 @@
             font-size: 16px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -237,11 +372,38 @@
             cursor: pointer;
             flex: 1;
             min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent
+            );
+            transition: left 0.7s;
+        }
+
+        .button:hover::before {
+            left: 100%;
         }
 
         .button-primary {
             background: var(--primary-gradient);
             color: #000000;
+            position: relative;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.4);
         }
 
         .button-secondary {
@@ -250,13 +412,15 @@
             border: 1px solid var(--card-border);
         }
 
-        .button:hover {
+        .button-secondary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
         }
 
         .button:active {
-            transform: translateY(-1px);
+            transform: translateY(-1px) scale(0.98);
+            transition: transform 0.1s;
         }
 
         /* ===== FOOTER ===== */
@@ -266,6 +430,8 @@
             font-size: 14px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 3s forwards;
         }
 
         .footer-links {
@@ -278,11 +444,30 @@
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--accent-cyan);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
         .footer-links a:hover {
             color: var(--accent-cyan);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
         }
 
         /* ===== MOBILE RESPONSIVE ===== */
@@ -313,15 +498,22 @@
                 height: 80px;
                 font-size: 36px;
             }
+            
+            .highlight {
+                min-width: 100px;
+                font-size: 14px;
+            }
         }
 
         /* ===== CONFETTI ===== */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             pointer-events: none;
             z-index: 1000;
+            border-radius: 50%;
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         /* ===== LOADING ===== */
@@ -329,11 +521,47 @@
             display: none;
             color: var(--accent-cyan);
             margin-top: 20px;
+            font-size: 16px;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-gradient);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 200, 83, 0.3);
+            display: none;
+            z-index: 10000;
+            animation: slideInFromRight 0.5s ease;
+            border-left: 5px solid white;
+        }
+
+        /* ===== PLATFORM INDICATOR ===== */
+        .platform-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 217, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            animation: borderGlow 2s infinite;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Platform Indicator -->
+        <div class="platform-indicator" id="platformIndicator">
+            <i class="fas fa-mobile-alt"></i> Mobile
+        </div>
+
         <!-- Logo -->
         <div class="logo-container">
             <div class="logo">AI</div>
@@ -353,7 +581,7 @@
         <div class="user-info" id="userInfo">
             <div class="info-item">
                 <i class="fas fa-user"></i>
-                <span>Welcome, <span id="userName" class="highlight">User</span></span>
+                <span>Welcome, <span id="userName" class="highlight">Loading...</span></span>
             </div>
             <div class="info-item">
                 <i class="fas fa-envelope"></i>
@@ -369,19 +597,19 @@
         <div class="next-steps">
             <h3><i class="fas fa-rocket"></i> What's Next?</h3>
             <ul class="steps-list">
-                <li><i class="fas fa-check-circle"></i> Return to Aura AI app</li>
+                <li><i class="fas fa-check-circle"></i> Return to Aura AI Dashboard</li>
                 <li><i class="fas fa-robot"></i> Explore all 7 AI agents</li>
                 <li><i class="fas fa-chart-line"></i> Start tracking your goals</li>
                 <li><i class="fas fa-cogs"></i> Customize your experience</li>
             </ul>
         </div>
 
-        <!-- Buttons -->
+        <!-- Universal Return Button -->
         <div class="buttons">
-            <a href="https://snack.expo.dev" class="button button-primary" id="returnBtn">
-                <i class="fas fa-arrow-left"></i>
-                Return to Aura AI
-            </a>
+            <button class="button button-primary" id="returnButton">
+                <i class="fas fa-rocket"></i>
+                <span id="buttonText">Enter Aura AI Dashboard</span>
+            </button>
             <button class="button button-secondary" id="copyInfoBtn">
                 <i class="far fa-copy"></i>
                 Copy Login Info
@@ -390,85 +618,168 @@
 
         <!-- Loading Indicator -->
         <div class="loading" id="loading">
-            <i class="fas fa-spinner fa-spin"></i> Processing...
+            <i class="fas fa-spinner fa-spin"></i> Redirecting to Aura AI...
         </div>
 
         <!-- Footer -->
         <div class="footer">
             <p>© 2024 Aura AI. Multi-Agent Intelligence Platform</p>
             <div class="footer-links">
-                <a href="https://snack.expo.dev">App</a>
+                <a href="#" id="openDashboard">Open Dashboard</a>
                 <a href="#" onclick="showHelp()">Help</a>
                 <a href="#" onclick="showPrivacy()">Privacy</a>
             </div>
         </div>
     </div>
 
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i> Copied to clipboard!
+    </div>
+
     <!-- Confetti Container -->
     <div id="confettiContainer"></div>
 
     <script>
-        // ===== MAIN SCRIPT =====
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const email = urlParams.get('email') || 'your@email.com';
-            const name = urlParams.get('name') || 'User';
-            const type = urlParams.get('type') || 'signup';
-            
-            // Update user info
-            document.getElementById('userName').textContent = name;
-            document.getElementById('userEmail').textContent = email;
-            document.getElementById('verifiedDate').textContent = new Date().toLocaleTimeString([], { 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            });
-            
-            // Update return button for mobile detection
-            const returnBtn = document.getElementById('returnBtn');
-            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                // Try to deep link back to app
-                returnBtn.href = `auraai://auth/confirmed?email=${encodeURIComponent(email)}`;
-                returnBtn.innerHTML = '<i class="fas fa-mobile-alt"></i> Open Aura AI App';
+        // ===== UNIVERSAL REDIRECT SYSTEM =====
+        class UniversalRedirect {
+            constructor() {
+                this.platform = this.detectPlatform();
+                this.expoUrls = {
+                    snack: 'exp://exp.host/@majesticfireflames/aura-ai', // Your Snack URL
+                    dev: 'exp://localhost:19000',
+                    // Add your deployed URLs later:
+                    production: 'https://yourauraai.com', // For web deployment
+                };
+                this.init();
             }
+
+            detectPlatform() {
+                const ua = navigator.userAgent;
+                if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(ua)) {
+                    return 'mobile';
+                }
+                return 'desktop';
+            }
+
+            init() {
+                console.log(`Platform detected: ${this.platform}`);
+                document.getElementById('platformIndicator').innerHTML = 
+                    this.platform === 'mobile' 
+                    ? '<i class="fas fa-mobile-alt"></i> Mobile' 
+                    : '<i class="fas fa-desktop"></i> Desktop';
+                
+                this.setupRedirectButton();
+                this.loadUserData();
+            }
+
+            setupRedirectButton() {
+                const button = document.getElementById('returnButton');
+                const buttonText = document.getElementById('buttonText');
+                
+                if (this.platform === 'mobile') {
+                    buttonText.textContent = 'Open Aura AI App';
+                    button.addEventListener('click', () => this.redirectToMobile());
+                } else {
+                    buttonText.textContent = 'Go to Aura AI Dashboard';
+                    button.addEventListener('click', () => this.redirectToWeb());
+                }
+            }
+
+            redirectToMobile() {
+                console.log('Attempting to open Expo app...');
+                
+                // Try Expo first
+                setTimeout(() => {
+                    window.location.href = this.expoUrls.snack;
+                }, 100);
+                
+                // Fallback to web if app not installed
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        console.log('App not detected, falling back to web...');
+                        window.location.href = 'https://snack.expo.dev/@majesticfireflames/aura-ai';
+                    }
+                }, 2000);
+            }
+
+            redirectToWeb() {
+                console.log('Redirecting to web dashboard...');
+                // When deployed, this will go to your web app
+                // For now, redirect to Snack web
+                window.location.href = 'https://snack.expo.dev/@majesticfireflames/aura-ai';
+            }
+
+            loadUserData() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email') || 'your@email.com';
+                const name = urlParams.get('name') || 'User';
+                
+                // Update UI with real data
+                document.getElementById('userName').textContent = name;
+                document.getElementById('userEmail').textContent = email;
+                document.getElementById('verifiedDate').textContent = 
+                    new Date().toLocaleTimeString([], { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+                
+                // Auto-redirect after 8 seconds
+                setTimeout(() => {
+                    this.autoRedirect();
+                }, 8000);
+            }
+
+            autoRedirect() {
+                console.log('Auto-redirecting...');
+                const loading = document.getElementById('loading');
+                loading.style.display = 'block';
+                
+                setTimeout(() => {
+                    if (this.platform === 'mobile') {
+                        this.redirectToMobile();
+                    } else {
+                        this.redirectToWeb();
+                    }
+                }, 1500);
+            }
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize redirect system
+            const redirector = new UniversalRedirect();
             
             // Copy info button
             document.getElementById('copyInfoBtn').addEventListener('click', function() {
-                const text = `Aura AI Login:\nEmail: ${email}\nName: ${name}\nStatus: Verified ✅`;
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email') || 'your@email.com';
+                const name = urlParams.get('name') || 'User';
+                
+                const text = `🎯 Aura AI Login Credentials:\n\n👤 Name: ${name}\n📧 Email: ${email}\n✅ Status: Verified\n🔗 Dashboard: https://snack.expo.dev/@majesticfireflames/aura-ai`;
                 
                 navigator.clipboard.writeText(text).then(() => {
-                    const originalHTML = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    this.style.background = 'var(--success-gradient)';
-                    this.style.color = '#000000';
+                    const successMsg = document.getElementById('successMessage');
+                    successMsg.style.display = 'block';
+                    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Login info copied!';
                     
                     setTimeout(() => {
-                        this.innerHTML = originalHTML;
-                        this.style.background = '';
-                        this.style.color = '';
-                    }, 2000);
+                        successMsg.style.display = 'none';
+                    }, 3000);
                 });
             });
-            
-            // Show celebration for signup confirmation
-            if (type === 'signup') {
-                setTimeout(() => {
-                    createConfetti();
-                    showSuccessAnimation();
-                }, 500);
-            }
-            
-            // Auto-redirect after 10 seconds (optional)
-            setTimeout(() => {
-                console.log('Auto-redirecting to Aura AI...');
-                // Uncomment to enable auto-redirect
-                // window.location.href = returnBtn.href;
-            }, 10000);
+
+            // Open Dashboard link
+            document.getElementById('openDashboard').addEventListener('click', function(e) {
+                e.preventDefault();
+                redirector.redirectToWeb();
+            });
+
+            // Create confetti
+            createConfetti();
         });
-        
-        // ===== CONFETTI FUNCTION =====
+
+        // ===== CONFETTI ANIMATION =====
         function createConfetti() {
             const colors = ['#00D9FF', '#00C853', '#6366F1', '#F43F5E', '#FF9800', '#A855F7'];
             const container = document.getElementById('confettiContainer');
@@ -478,33 +789,21 @@
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = Math.random() * 10 + 5 + 'px';
-                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = Math.random() * 8 + 4 + 'px';
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.animation = `confettiFloat ${Math.random() * 2 + 1}s ease-in forwards`;
                 confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                confetti.style.animationDelay = Math.random() * 1 + 's';
                 
                 container.appendChild(confetti);
                 
-                // Remove after animation
                 setTimeout(() => {
                     confetti.remove();
-                }, 5000);
+                }, 3000);
             }
         }
-        
-        // ===== SUCCESS ANIMATION =====
-        function showSuccessAnimation() {
-            const successIcon = document.querySelector('.success-icon');
-            successIcon.style.animation = 'pulse 0.5s ease 3';
-            
-            // Add celebration message
-            setTimeout(() => {
-                const subtitle = document.querySelector('.subtitle');
-                subtitle.innerHTML += '<br><span style="color: #00C853; font-weight: 600;">🎉 Welcome to the Aura AI community!</span>';
-            }, 1000);
-        }
-        
+
         // ===== HELPER FUNCTIONS =====
         function showHelp() {
             alert('Need help? Return to the Aura AI app and contact support through the Settings page.');
@@ -514,12 +813,6 @@
         function showPrivacy() {
             alert('Your data is secure with Aura AI. We use industry-standard encryption to protect your information.');
             return false;
-        }
-        
-        // ===== BROWSER COMPATIBILITY =====
-        if (!navigator.clipboard) {
-            document.getElementById('copyInfoBtn').style.display = 'none';
-            console.warn('Clipboard API not supported');
         }
     </script>
 </body>
