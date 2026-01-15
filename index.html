@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✅ Email Confirmed - Aura AI</title>
+    <title>Email Confirmed | Aura AI</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
     
-    <!-- Font Awesome Icons -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -18,23 +21,26 @@
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #00BCD4 0%, #00D9FF 100%);
-            --success-gradient: linear-gradient(135deg, #00C853 0%, #10B981 100%);
-            --bg-gradient: linear-gradient(135deg, #0A0118 0%, #1a0b2e 100%);
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #FFFFFF;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --accent-cyan: #00D9FF;
-            --accent-purple: #6366F1;
-            --accent-pink: #F43F5E;
-            --accent-green: #00C853;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --primary-color: #6366F1;
+            --primary-light: #818CF8;
+            --primary-dark: #4F46E5;
+            --success-color: #10B981;
+            --success-light: #34D399;
+            --dark-bg: #0F172A;
+            --card-bg: #1E293B;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --gradient-primary: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            --gradient-success: linear-gradient(135deg, #10B981 0%, #34D399 100%);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg-gradient);
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -42,96 +48,64 @@
             align-items: center;
             padding: 20px;
             line-height: 1.6;
-            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
         }
 
-        /* ===== SMOOTH ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.95); 
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
-        }
-
-        @keyframes gentlePulse {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 10px 30px rgba(0, 200, 83, 0.3);
-            }
-            50% { 
-                transform: scale(1.05); 
-                box-shadow: 0 15px 40px rgba(0, 200, 83, 0.5);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @keyframes gentleFloat {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg); 
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
             }
-            33% { 
-                transform: translateY(-8px) rotate(-1deg); 
-            }
-            66% { 
-                transform: translateY(-4px) rotate(1deg); 
+            to {
+                opacity: 1;
+                transform: scale(1);
             }
         }
 
-        @keyframes confettiFloat {
-            0% { 
-                transform: translateY(-100px) rotate(0deg); 
-                opacity: 1; 
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 100;
             }
-            100% { 
-                transform: translateY(100vh) rotate(360deg); 
-                opacity: 0; 
+            100% {
+                stroke-dashoffset: 0;
             }
         }
 
         @keyframes shimmer {
-            0% { 
-                background-position: -1000px 0; 
-            }
-            100% { 
-                background-position: 1000px 0; 
-            }
-        }
-
-        @keyframes borderGlow {
-            0%, 100% { 
-                border-color: rgba(0, 217, 255, 0.3); 
-            }
-            50% { 
-                border-color: rgba(0, 217, 255, 0.8); 
-            }
-        }
-
-        @keyframes buttonShimmer {
             0% {
-                background-position: -500px 0;
+                background-position: -200% center;
             }
             100% {
-                background-position: 500px 0;
+                background-position: 200% center;
             }
         }
 
         /* ===== MAIN CONTAINER ===== */
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
             border-radius: 24px;
-            border: 1px solid var(--card-border);
-            padding: 40px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            animation: fadeIn 0.8s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+            padding: 48px 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .container::before {
@@ -140,340 +114,317 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--accent-cyan), 
-                var(--accent-purple), 
-                transparent
-            );
-            animation: shimmer 3s infinite linear;
+            height: 4px;
+            background: var(--gradient-primary);
+            animation: shimmer 2s infinite linear;
+            background-size: 200% auto;
         }
 
-        /* ===== LOGO ===== */
-        .logo-container {
-            margin-bottom: 30px;
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-gradient);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
             font-size: 32px;
-            font-weight: 800;
-            color: #000000;
-            animation: gentleFloat 6s ease-in-out infinite;
-        }
-
-        .logo-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 0.3s forwards;
-        }
-
-        /* ===== SUCCESS ICON ===== */
-        .success-icon {
-            width: 100px;
-            height: 100px;
-            background: var(--success-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 48px;
-            color: var(--text-primary);
-            animation: gentlePulse 2s infinite ease-in-out;
-            box-shadow: 0 10px 30px rgba(0, 200, 83, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .success-icon::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 50%;
-            background: conic-gradient(
-                transparent, 
-                var(--accent-cyan), 
-                transparent, 
-                var(--accent-purple), 
-                transparent
-            );
-            animation: rotate 4s linear infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* ===== HEADINGS ===== */
-        h1 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--text-primary) 100%);
+            font-weight: 700;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            background-size: 200% auto;
-            animation: shimmer 3s infinite linear;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeIn 0.6s ease 0.4s forwards;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===== SUCCESS ICON ===== */
+        .success-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .success-circle {
+            width: 100px;
+            height: 100px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            position: relative;
+            border: 2px solid var(--success-color);
+        }
+
+        .success-circle::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        .success-icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .checkmark {
+            stroke: var(--success-color);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark 0.6s ease-in-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* ===== TITLE SECTION ===== */
+        .title-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
             font-size: 18px;
             color: var(--text-secondary);
-            margin-bottom: 30px;
             line-height: 1.5;
-            opacity: 0;
-            animation: fadeIn 0.6s ease 0.6s forwards;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* ===== MESSAGE FROM CEO ===== */
+        .ceo-message {
+            background: rgba(99, 102, 241, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .ceo-message::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            font-size: 64px;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-light);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .ceo-content {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ceo-signature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .ceo-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .ceo-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .ceo-info p {
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
         /* ===== USER INFO ===== */
         .user-info {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 41, 59, 0.5);
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--accent-cyan);
-            animation: borderGlow 2s infinite;
-            opacity: 0;
-            animation: fadeIn 0.6s ease 0.8s forwards, borderGlow 2s infinite ease-in-out;
+            padding: 24px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.6s ease-out 0.4s both;
         }
 
-        .info-item {
+        .info-row {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            color: var(--text-secondary);
-            opacity: 0;
-            transform: translateX(-20px);
+            padding: 12px 0;
         }
 
-        .info-item:nth-child(1) { animation: slideInFromLeft 0.5s ease 1s forwards; }
-        .info-item:nth-child(2) { animation: slideInFromRight 0.5s ease 1.2s forwards; }
-        .info-item:nth-child(3) { animation: slideInFromLeft 0.5s ease 1.4s forwards; }
-
-        .info-item:last-child {
-            margin-bottom: 0;
+        .info-row:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .info-item i {
-            color: var(--accent-cyan);
+        .info-icon {
             width: 20px;
-        }
-
-        .highlight {
-            color: var(--accent-cyan);
-            font-weight: 600;
-            background: rgba(0, 217, 255, 0.1);
-            padding: 6px 14px;
-            border-radius: 8px;
-            margin: 0 5px;
-            display: inline-block;
-            min-width: 120px;
-            text-align: center;
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .highlight:hover {
-            background: rgba(0, 217, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        /* ===== NEXT STEPS ===== */
-        .next-steps {
-            text-align: left;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            opacity: 0;
-            animation: fadeIn 0.6s ease 1.6s forwards;
-        }
-
-        .next-steps h3 {
+            color: var(--primary-light);
+            margin-right: 12px;
             font-size: 16px;
-            color: var(--accent-cyan);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .steps-list {
-            list-style: none;
-        }
-
-        .steps-list li {
-            padding: 10px 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transform: translateX(-10px);
-        }
-
-        .steps-list li:nth-child(1) { animation: slideInFromLeft 0.4s ease 1.8s forwards; }
-        .steps-list li:nth-child(2) { animation: slideInFromRight 0.4s ease 2s forwards; }
-        .steps-list li:nth-child(3) { animation: slideInFromLeft 0.4s ease 2.2s forwards; }
-        .steps-list li:nth-child(4) { animation: slideInFromRight 0.4s ease 2.4s forwards; }
-
-        .steps-list li i {
-            color: var(--accent-green);
+        .info-label {
             font-size: 14px;
+            color: var(--text-muted);
+            width: 80px;
         }
 
-        /* ===== BUTTONS ===== */
-        .buttons {
+        .info-value {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 500;
+            flex: 1;
+        }
+
+        /* ===== ACTION BUTTONS ===== */
+        .actions {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 30px;
-            opacity: 0;
-            animation: fadeIn 0.6s ease 2.6s forwards;
+            flex-direction: column;
+            gap: 16px;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
         }
 
-        .button {
-            padding: 16px 30px;
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            flex: 1;
-            min-width: 200px;
             position: relative;
             overflow: hidden;
         }
 
-        .button::before {
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-light);
+            color: var(--text-primary);
+        }
+
+        .btn::after {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent
-            );
-            transition: left 0.7s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
         }
 
-        .button:hover::before {
+        .btn:hover::after {
             left: 100%;
-        }
-
-        .button-primary {
-            background: var(--primary-gradient);
-            color: #000000;
-            position: relative;
-        }
-
-        .button-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.4);
-        }
-
-        .button-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border: 1px solid var(--card-border);
-        }
-
-        .button-secondary:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
-        }
-
-        .button:active {
-            transform: translateY(-1px) scale(0.98);
-            transition: transform 0.1s;
         }
 
         /* ===== FOOTER ===== */
         .footer {
             margin-top: 40px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-            opacity: 0;
-            animation: fadeIn 0.6s ease 3s forwards;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 13px;
+            animation: fadeInUp 0.6s ease-out 0.8s both;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 10px;
+            margin-top: 16px;
         }
 
         .footer-links a {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 10px;
-            border-radius: 6px;
-        }
-
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 1px;
-            background: var(--accent-cyan);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+            font-size: 13px;
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: var(--accent-cyan);
+            color: var(--primary-light);
         }
 
-        .footer-links a:hover::after {
-            width: 100%;
+        /* ===== LOADING ===== */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--primary-light);
+            font-size: 14px;
         }
 
-        /* ===== MOBILE RESPONSIVE ===== */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 600px) {
             .container {
-                padding: 30px 20px;
+                padding: 32px 24px;
                 border-radius: 20px;
             }
             
@@ -485,334 +436,281 @@
                 font-size: 16px;
             }
             
-            .buttons {
-                flex-direction: column;
+            .ceo-message {
+                padding: 20px;
             }
             
-            .button {
-                min-width: 100%;
+            .user-info {
+                padding: 20px;
             }
             
-            .success-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 36px;
-            }
-            
-            .highlight {
-                min-width: 100px;
-                font-size: 14px;
+            .btn {
+                padding: 14px 20px;
             }
         }
 
-        /* ===== CONFETTI ===== */
-        .confetti {
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
             position: fixed;
-            width: 12px;
-            height: 12px;
-            pointer-events: none;
-            z-index: 1000;
-            border-radius: 50%;
-            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* ===== LOADING ===== */
-        .loading {
-            display: none;
-            color: var(--accent-cyan);
-            margin-top: 20px;
-            font-size: 16px;
-        }
-
-        /* ===== SUCCESS MESSAGE ===== */
-        .success-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--success-gradient);
-            color: white;
-            padding: 15px 25px;
+            bottom: 24px;
+            right: 24px;
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 200, 83, 0.3);
-            display: none;
-            z-index: 10000;
-            animation: slideInFromRight 0.5s ease;
-            border-left: 5px solid white;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--success-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
         }
 
-        /* ===== PLATFORM INDICATOR ===== */
-        .platform-indicator {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 217, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: var(--accent-cyan);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            animation: borderGlow 2s infinite;
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: var(--success-color);
+            font-size: 18px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Platform Indicator -->
-        <div class="platform-indicator" id="platformIndicator">
-            <i class="fas fa-mobile-alt"></i> Mobile
-        </div>
-
-        <!-- Logo -->
-        <div class="logo-container">
-            <div class="logo">AI</div>
-            <div class="logo-text">Aura AI</div>
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">Aura AI</div>
+            <div class="tagline">Intelligent Life Assistant</div>
         </div>
 
         <!-- Success Icon -->
-        <div class="success-icon">
-            <i class="fas fa-check"></i>
+        <div class="success-container">
+            <div class="success-circle">
+                <svg class="success-icon" viewBox="0 0 52 52">
+                    <path class="checkmark" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
         </div>
 
-        <!-- Main Heading -->
-        <h1>Email Confirmed!</h1>
-        <p class="subtitle">Welcome to Aura AI. Your account is now fully verified and ready to use.</p>
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1>Email Confirmed</h1>
+            <p class="subtitle">Your account has been successfully verified and is now ready to use</p>
+        </div>
+
+        <!-- CEO Message -->
+        <div class="ceo-message">
+            <p class="ceo-content">
+                The Company's CEO - Faiza feels garden garden on having you here! Welcome to the Aura AI family. We're excited to embark on this journey with you and help you achieve your goals through intelligent assistance.
+            </p>
+            <div class="ceo-signature">
+                <div class="ceo-avatar">F</div>
+                <div class="ceo-info">
+                    <h4>Faiza</h4>
+                    <p>CEO & Founder, Aura AI</p>
+                </div>
+            </div>
+        </div>
 
         <!-- User Information -->
-        <div class="user-info" id="userInfo">
-            <div class="info-item">
-                <i class="fas fa-user"></i>
-                <span>Welcome, <span id="userName" class="highlight">Loading...</span></span>
+        <div class="user-info">
+            <div class="info-row">
+                <div class="info-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="info-label">Name</div>
+                <div class="info-value" id="userName">Loading...</div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
-                <span>Email: <span id="userEmail" class="highlight">loading...</span></span>
+            <div class="info-row">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-label">Email</div>
+                <div class="info-value" id="userEmail">Loading...</div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-calendar-check"></i>
-                <span>Verified: <span class="highlight" id="verifiedDate">Just now</span></span>
+            <div class="info-row">
+                <div class="info-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="info-label">Verified</div>
+                <div class="info-value" id="verifiedTime">Just now</div>
             </div>
         </div>
 
-        <!-- Next Steps -->
-        <div class="next-steps">
-            <h3><i class="fas fa-rocket"></i> What's Next?</h3>
-            <ul class="steps-list">
-                <li><i class="fas fa-check-circle"></i> Return to Aura AI Dashboard</li>
-                <li><i class="fas fa-robot"></i> Explore all 7 AI agents</li>
-                <li><i class="fas fa-chart-line"></i> Start tracking your goals</li>
-                <li><i class="fas fa-cogs"></i> Customize your experience</li>
-            </ul>
-        </div>
-
-        <!-- Universal Return Button -->
-        <div class="buttons">
-            <button class="button button-primary" id="returnButton">
+        <!-- Action Buttons -->
+        <div class="actions">
+            <button class="btn btn-primary" id="openAppBtn">
                 <i class="fas fa-rocket"></i>
-                <span id="buttonText">Enter Aura AI Dashboard</span>
+                Enter Aura AI Dashboard
             </button>
-            <button class="button button-secondary" id="copyInfoBtn">
+            <button class="btn btn-secondary" id="copyDetailsBtn">
                 <i class="far fa-copy"></i>
-                Copy Login Info
+                Copy Account Details
             </button>
         </div>
 
         <!-- Loading Indicator -->
-        <div class="loading" id="loading">
+        <div class="loading" id="loadingIndicator">
             <i class="fas fa-spinner fa-spin"></i> Redirecting to Aura AI...
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2024 Aura AI. Multi-Agent Intelligence Platform</p>
+            <p>© 2024 Aura AI. All rights reserved.</p>
             <div class="footer-links">
-                <a href="#" id="openDashboard">Open Dashboard</a>
-                <a href="#" onclick="showHelp()">Help</a>
-                <a href="#" onclick="showPrivacy()">Privacy</a>
+                <a href="#" id="helpLink">Help Center</a>
+                <a href="#" id="privacyLink">Privacy Policy</a>
+                <a href="#" id="termsLink">Terms of Service</a>
             </div>
         </div>
     </div>
 
-    <!-- Success Message -->
-    <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i> Copied to clipboard!
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="toast-message" id="toastMessage">Copied to clipboard!</div>
     </div>
 
-    <!-- Confetti Container -->
-    <div id="confettiContainer"></div>
-
     <script>
-        // ===== UNIVERSAL REDIRECT SYSTEM =====
-        class UniversalRedirect {
-            constructor() {
-                this.platform = this.detectPlatform();
-                this.expoUrls = {
-                    snack: 'exp://exp.host/@majesticfireflames/aura-ai', // Your Snack URL
-                    dev: 'exp://localhost:19000',
-                    // Add your deployed URLs later:
-                    production: 'https://yourauraai.com', // For web deployment
-                };
-                this.init();
-            }
-
-            detectPlatform() {
-                const ua = navigator.userAgent;
-                if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(ua)) {
-                    return 'mobile';
-                }
-                return 'desktop';
-            }
-
-            init() {
-                console.log(`Platform detected: ${this.platform}`);
-                document.getElementById('platformIndicator').innerHTML = 
-                    this.platform === 'mobile' 
-                    ? '<i class="fas fa-mobile-alt"></i> Mobile' 
-                    : '<i class="fas fa-desktop"></i> Desktop';
-                
-                this.setupRedirectButton();
-                this.loadUserData();
-            }
-
-            setupRedirectButton() {
-                const button = document.getElementById('returnButton');
-                const buttonText = document.getElementById('buttonText');
-                
-                if (this.platform === 'mobile') {
-                    buttonText.textContent = 'Open Aura AI App';
-                    button.addEventListener('click', () => this.redirectToMobile());
-                } else {
-                    buttonText.textContent = 'Go to Aura AI Dashboard';
-                    button.addEventListener('click', () => this.redirectToWeb());
-                }
-            }
-
-            redirectToMobile() {
-                console.log('Attempting to open Expo app...');
-                
-                // Try Expo first
-                setTimeout(() => {
-                    window.location.href = this.expoUrls.snack;
-                }, 100);
-                
-                // Fallback to web if app not installed
-                setTimeout(() => {
-                    if (!document.hidden) {
-                        console.log('App not detected, falling back to web...');
-                        window.location.href = 'https://snack.expo.dev/@majesticfireflames/aura-ai';
-                    }
-                }, 2000);
-            }
-
-            redirectToWeb() {
-                console.log('Redirecting to web dashboard...');
-                // When deployed, this will go to your web app
-                // For now, redirect to Snack web
-                window.location.href = 'https://snack.expo.dev/@majesticfireflames/aura-ai';
-            }
-
-            loadUserData() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const email = urlParams.get('email') || 'your@email.com';
-                const name = urlParams.get('name') || 'User';
-                
-                // Update UI with real data
-                document.getElementById('userName').textContent = name;
-                document.getElementById('userEmail').textContent = email;
-                document.getElementById('verifiedDate').textContent = 
-                    new Date().toLocaleTimeString([], { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                    });
-                
-                // Auto-redirect after 8 seconds
-                setTimeout(() => {
-                    this.autoRedirect();
-                }, 8000);
-            }
-
-            autoRedirect() {
-                console.log('Auto-redirecting...');
-                const loading = document.getElementById('loading');
-                loading.style.display = 'block';
-                
-                setTimeout(() => {
-                    if (this.platform === 'mobile') {
-                        this.redirectToMobile();
-                    } else {
-                        this.redirectToWeb();
-                    }
-                }, 1500);
-            }
-        }
-
-        // ===== INITIALIZE =====
+        // ===== MAIN SCRIPT =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize redirect system
-            const redirector = new UniversalRedirect();
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email') || 'your@email.com';
+            const name = urlParams.get('name') || 'User';
+            const type = urlParams.get('type') || 'signup';
             
-            // Copy info button
-            document.getElementById('copyInfoBtn').addEventListener('click', function() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const email = urlParams.get('email') || 'your@email.com';
-                const name = urlParams.get('name') || 'User';
-                
-                const text = `🎯 Aura AI Login Credentials:\n\n👤 Name: ${name}\n📧 Email: ${email}\n✅ Status: Verified\n🔗 Dashboard: https://snack.expo.dev/@majesticfireflames/aura-ai`;
-                
-                navigator.clipboard.writeText(text).then(() => {
-                    const successMsg = document.getElementById('successMessage');
-                    successMsg.style.display = 'block';
-                    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Login info copied!';
-                    
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 3000);
-                });
-            });
-
-            // Open Dashboard link
-            document.getElementById('openDashboard').addEventListener('click', function(e) {
-                e.preventDefault();
-                redirector.redirectToWeb();
-            });
-
-            // Create confetti
-            createConfetti();
-        });
-
-        // ===== CONFETTI ANIMATION =====
-        function createConfetti() {
-            const colors = ['#00D9FF', '#00C853', '#6366F1', '#F43F5E', '#FF9800', '#A855F7'];
-            const container = document.getElementById('confettiContainer');
+            // Update user info
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userEmail').textContent = email;
+            document.getElementById('verifiedTime').textContent = getCurrentTime();
             
-            for (let i = 0; i < 150; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = Math.random() * 8 + 4 + 'px';
-                confetti.style.height = Math.random() * 8 + 4 + 'px';
-                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                confetti.style.animation = `confettiFloat ${Math.random() * 2 + 1}s ease-in forwards`;
-                confetti.style.opacity = Math.random() * 0.7 + 0.3;
-                confetti.style.animationDelay = Math.random() * 1 + 's';
-                
-                container.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 3000);
+            // Platform detection
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+            const appBtn = document.getElementById('openAppBtn');
+            
+            // Set button text based on platform
+            if (isMobile) {
+                appBtn.innerHTML = '<i class="fas fa-mobile-alt"></i> Open Aura AI App';
+                appBtn.addEventListener('click', openMobileApp);
+            } else {
+                appBtn.innerHTML = '<i class="fas fa-desktop"></i> Open Dashboard';
+                appBtn.addEventListener('click', openWebDashboard);
             }
-        }
-
-        // ===== HELPER FUNCTIONS =====
-        function showHelp() {
-            alert('Need help? Return to the Aura AI app and contact support through the Settings page.');
-            return false;
+            
+            // Copy details button
+            document.getElementById('copyDetailsBtn').addEventListener('click', copyAccountDetails);
+            
+            // Footer links
+            document.getElementById('helpLink').addEventListener('click', showHelp);
+            document.getElementById('privacyLink').addEventListener('click', showPrivacy);
+            document.getElementById('termsLink').addEventListener('click', showTerms);
+            
+            // Auto-redirect after 8 seconds
+            setTimeout(() => {
+                autoRedirect();
+            }, 8000);
+        });
+        
+        // ===== FUNCTIONS =====
+        function getCurrentTime() {
+            return new Date().toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
         
-        function showPrivacy() {
-            alert('Your data is secure with Aura AI. We use industry-standard encryption to protect your information.');
-            return false;
+        function openMobileApp() {
+            const loading = document.getElementById('loadingIndicator');
+            loading.style.display = 'block';
+            
+            // Try to open Expo app
+            setTimeout(() => {
+                window.location.href = 'exp://exp.host/@majesticfireflames/aura-ai';
+            }, 100);
+            
+            // Fallback to web
+            setTimeout(() => {
+                if (!document.hidden) {
+                    openWebDashboard();
+                }
+            }, 2000);
+        }
+        
+        function openWebDashboard() {
+            showLoading();
+            setTimeout(() => {
+                window.location.href = 'https://snack.expo.dev/@majesticfireflames/aura-ai';
+            }, 500);
+        }
+        
+        function copyAccountDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email') || 'your@email.com';
+            const name = urlParams.get('name') || 'User';
+            
+            const text = `Aura AI Account Details:\n\n👤 Name: ${name}\n📧 Email: ${email}\n✅ Status: Verified\n🔗 Dashboard: https://snack.expo.dev/@majesticfireflames/aura-ai`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Account details copied to clipboard!');
+            });
+        }
+        
+        function autoRedirect() {
+            const loading = document.getElementById('loadingIndicator');
+            loading.style.display = 'block';
+            
+            setTimeout(() => {
+                const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+                if (isMobile) {
+                    openMobileApp();
+                } else {
+                    openWebDashboard();
+                }
+            }, 1000);
+        }
+        
+        function showLoading() {
+            const loading = document.getElementById('loadingIndicator');
+            loading.style.display = 'block';
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        function showHelp(e) {
+            e.preventDefault();
+            showToast('Visit the Help Center in the Aura AI app');
+        }
+        
+        function showPrivacy(e) {
+            e.preventDefault();
+            showToast('Privacy policy available in app settings');
+        }
+        
+        function showTerms(e) {
+            e.preventDefault();
+            showToast('Terms of service available in app settings');
         }
     </script>
 </body>
