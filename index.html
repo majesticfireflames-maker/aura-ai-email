@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Confirmed | Aura AI</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -135,30 +135,14 @@
         .subtitle {
             color: var(--text-secondary);
             font-size: 16px;
-            margin-bottom: 24px;
-        }
-
-        .email-display {
-            background: rgba(99, 102, 241, 0.15);
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin: 20px 0;
-            display: inline-block;
-            width: auto;
-        }
-
-        .email-display span {
-            color: var(--primary-light);
-            font-size: 16px;
-            font-weight: 500;
-            word-break: break-all;
+            margin-bottom: 40px;
         }
 
         .ceo-message {
             background: rgba(99, 102, 241, 0.08);
             border-radius: 20px;
             padding: 28px;
-            margin: 32px 0;
+            margin-bottom: 32px;
             border: 1px solid rgba(99, 102, 241, 0.2);
             text-align: left;
             position: relative;
@@ -239,17 +223,6 @@
             box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary-light);
-        }
-
         .footer {
             margin-top: 32px;
             padding-top: 24px;
@@ -258,33 +231,11 @@
             font-size: 12px;
         }
 
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 12px 20px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--success-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
         .loading {
             display: none;
-            margin: 20px 0;
+            margin-top: 16px;
             color: var(--primary-light);
+            font-size: 14px;
         }
 
         .loading.show {
@@ -306,12 +257,6 @@
         <h1>Email Confirmed! 🎉</h1>
         <p class="subtitle">Your email has been successfully verified.</p>
 
-        <!-- Show email if provided -->
-        <div id="emailContainer" style="display: none;" class="email-display">
-            <i class="fas fa-envelope" style="margin-right: 8px; color: var(--primary-light);"></i>
-            <span id="verifiedEmail"></span>
-        </div>
-
         <div class="ceo-message">
             <p class="ceo-content">
                 The Company's CEO - Faiza feels very happy to have you here! Welcome to the Aura AI family. We're excited to embark on this journey with you and help you achieve your goals through intelligent assistance.
@@ -329,11 +274,6 @@
             <i class="fas fa-arrow-right"></i>
             Continue to Aura AI
         </button>
-        
-        <button class="btn btn-secondary" id="copyBtn">
-            <i class="far fa-copy"></i>
-            Copy Confirmation Details
-        </button>
 
         <div class="loading" id="loadingIndicator">
             <i class="fas fa-spinner fa-spin"></i> Redirecting to Aura AI...
@@ -344,64 +284,28 @@
         </div>
     </div>
 
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle" style="color: #10B981;"></i>
-        <span id="toastMessage">Copied!</span>
-    </div>
-
     <script>
-        // ===== CONFIGURATION =====
-        // 🔧 CHANGE THIS TO YOUR VERCEL URL AFTER DEPLOYMENT!
+        // YOUR LIVE APP URL
         const AURA_AI_APP_URL = 'https://auraaiapp.vercel.app/';
         
-        // ===== GET EMAIL FROM URL =====
-        const urlParams = new URLSearchParams(window.location.search);
-        const email = urlParams.get('email');
-        const name = urlParams.get('name') || 'there';
-        
-        // ===== SHOW EMAIL IF PROVIDED =====
-        if (email && email !== 'null' && email !== '') {
-            const emailContainer = document.getElementById('emailContainer');
-            const verifiedEmail = document.getElementById('verifiedEmail');
-            verifiedEmail.textContent = email;
-            emailContainer.style.display = 'inline-block';
-        }
-        
-        // ===== CONTINUE BUTTON - OPENS YOUR VERCEL APP =====
+        // Continue button - redirects to your live app
         document.getElementById('continueBtn').addEventListener('click', function() {
             const loading = document.getElementById('loadingIndicator');
             loading.classList.add('show');
             
-            // Redirect to your deployed Vercel app
             setTimeout(() => {
                 window.location.href = AURA_AI_APP_URL;
-            }, 500);
+            }, 300);
         });
         
-        // ===== COPY BUTTON =====
-        document.getElementById('copyBtn').addEventListener('click', function() {
-            const emailText = email ? `\n📧 Email: ${email}` : '';
-            const text = `Aura AI - Email Confirmation\n\n✅ Email verified successfully!${emailText}\n📅 Verified on: ${new Date().toLocaleString()}\n\nWelcome to the Aura AI family! - CEO Faiza\n\nLaunch app: ${AURA_AI_APP_URL}`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                const msg = document.getElementById('toastMessage');
-                msg.textContent = 'Confirmation details copied!';
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2000);
-            });
-        });
-        
-        // ===== AUTO-REDIRECT AFTER 5 SECONDS =====
+        // Auto-redirect after 4 seconds
         setTimeout(() => {
             const loading = document.getElementById('loadingIndicator');
             loading.classList.add('show');
             setTimeout(() => {
                 window.location.href = AURA_AI_APP_URL;
-            }, 500);
-        }, 5000);
+            }, 300);
+        }, 4000);
     </script>
 </body>
 </html>
